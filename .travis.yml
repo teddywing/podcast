@@ -31,6 +31,16 @@ branches:
     # is pushed. This regex matches semantic versions like v1.2.3-rc4+2016.02.22
     - /^\d+\.\d+\.\d+.*$/
 
+before_deploy: bash ci/before_deploy.sh
+deploy:
+  provider: releases
+  api_key:
+    secure: "A43QwedQFBl6KIjy3LpQSYUTpC4OoWW6XiWB1TxVVfvCIjTD8cCl43Mt17Tl74yxf/oNC6SuKHMruihfiFLZpfxuFF2xj143oBsY38eST9P3qGk7+XAw3XcdiKkJOnYCcY00htl3goQj6qwA3cmFSQ6mj5aQofnIh0QlTsFSrZJrckUY1w7sj+rpejmmVMiLfcOzP8Ks7d/N0sXIury+6C/9hSlDOdvQuYvRtyQ0y9JWWR5rhy7CV0nTnDzefw1BA2j8+uYgpeW9QvI056bgH+g7NSAI+mr9zE8XsNawKOpWAlYqAaegRz1caTGp8FK82jyacmDVvucWx1sVYb2HXHZJpK1mTqZFL7ZGH2eKCPa+SvmCFP+MfTH0K5ivKIDEHIsbpL5U6Eycuy+T7y9+ANJ24f0VzTx1vZAhfw5CFoeE0HPLqVlbWMSiYDn9LT1zIoxSJij0TSdhh4ERcgvVaaUVyzTxlkaIDvnAyHNWyumbH+c7efRX5woqIzBithpbZROps3Ch7b20rtFG1XzPLkYMVL+bMEqlzDQvoda0ZPXveLJNshNfj6apf5oHfhEc/R49im7Dku9XWJvnumjLmpw5ElH7UAp5UA8NEfGoWcadq5jBMRSH+kZdIl7U/WN5MBIU4TAT8FpZN0MMlfHgNZjNJlkmlic81zVT/7AB+AU="
+  file: $PROJECT_NAME-$TRAVIS_TAG-$TARGET.tar.gz
+  skip_cleanup: true
+  on:
+    tags: true
+
 notifications:
   email:
 on_success: never
